@@ -1,6 +1,6 @@
 {
   "name": "node-import-alias-ts",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Simple POC writing a NPM package using TypeScript and Node.js import aliases.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",

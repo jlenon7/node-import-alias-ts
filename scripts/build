@@ -2,14 +2,4 @@
 
 sh scripts/clean
 
-./node_modules/.bin/tsc
-
-if [[ $1 == --silent ]]; then
-  exit 0
-  else
-    echo Compilation complete. We recommend using the \"build\" script only inside pipelines because it \
-    could mess up with your development environment creating .js and .d.ts files within your TypeScript \
-    source. This is a required behavior to resolve Node.js import aliases correctly locally and when \
-    installing the project without doing any changes in the package.json \"imports\" property. If you \
-    had run \"build\" and wants to remove all .js and .d.ts files use the unstable \"clean\" script.
-fi
+./node_modules/.bin/tsc --project scripts/tsconfig.build.json

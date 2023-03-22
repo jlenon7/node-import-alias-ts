@@ -120,9 +120,9 @@ out
 *.js
 *.d.ts
 *.js.map
-!tests/Stubs/*.js
-!tests/Stubs/*.d.ts
-!tests/Stubs/*.js.map
+!tests/Stubs/**/*.js
+!tests/Stubs/**/*.d.ts
+!tests/Stubs/**/*.js.map
 
 # IDE
 .idea

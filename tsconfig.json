@@ -8,9 +8,8 @@
     "rootDir": ".",
     "baseUrl": ".",
     "outDir": ".",
-    "module": "ESNext",
+    "module": "NodeNext",
     "target": "ESNext",
-    "lib": ["ESNext"],
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,9 +20,9 @@
     "paths": {
       "#bin/*": ["./bin/*.ts"],
       "#src/*": ["./src/*.ts"],
-      "#tests/*": ["./tests/*.ts"],
+      "#tests/*": ["./tests/*.ts"]
     }
   },
   "include": ["./**/*"],
-  "exclude": ["./build", "./node_modules"],
+  "exclude": ["build", "node_modules"]
 }
