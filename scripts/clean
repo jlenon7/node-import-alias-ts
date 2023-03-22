@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rm -rf bin/*.js bin/*.d.ts bin/*.js.map \
+       bin/**/*.js bin/**/*.d.ts bin/**/*.js.map \
+       src/*.js src/*.d.ts src/*.js.map \
+       src/**/*.js src/**/*.d.ts src/**/*.js.map \
+       tests/*.js tests/*.d.ts tests/*.js.map \
+       tests/Unit/*.js tests/Unit/*.d.ts tests/Unit/*.js.map \
+       tests/Helpers/*.js tests/Helpers/*.d.ts tests/Helpers/*.js.map \

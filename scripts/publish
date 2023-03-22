@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sh scripts/build --silent
+
+npm publish --access public
+
+sh scripts/clean
