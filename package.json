@@ -1,0 +1,181 @@
+{
+  "name": "node-import-alias-ts",
+  "version": "1.0.0",
+  "description": "Simple POC writing a NPM package using TypeScript and Node.js import aliases.",
+  "license": "MIT",
+  "author": "João Lenon <lenon@athenna.io>",
+  "bugs": "https://github.com/jlenon7/node-import-alias-ts/issues",
+  "repository": "https://github.com/jlenon7/node-import-alias-ts.git",
+  "homepage": "https://github.com/jlenon7/node-import-alias-ts#readme",
+  "keywords": [
+    "esm",
+    "import-alias"
+  ],
+  "scripts": {
+    "build": "rimraf build && tsc --project ./bin/tsconfig.build.json",
+    "lint:fix": "eslint \"{bin,src,tests}/**/*.ts\" --fix",
+    "test": "npm run --silent lint:fix && sh node bin/test.ts",
+    "test:debug": "cross-env DEBUG=api:* sh node --inspect bin/test.ts",
+    "test:coverage": "c8 npm run --silent test"
+  },
+  "files": [
+    "build/*.js",
+    "build/*.d.ts",
+    "build/**/*.js",
+    "build/**/*.d.ts",
+    "templates/**"
+  ],
+  "type": "module",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "exports": {
+    ".": "./build/index.js"
+  },
+  "imports": {
+    "#bin/*": {
+      "node": "./bin/*.js",
+      "default": "./build/*.js"
+    },
+    "#bin": {
+      "node": "./bin/index.js",
+      "default": "./build/index.js"
+    },
+    "#src/*": {
+      "node": "./src/*.js",
+      "default": "./build/*.js"
+    },
+    "#src": {
+      "node": "./src/index.js",
+      "default": "./build/index.js"
+    },
+    "#tests/*": {
+      "node": "./tests/*.js",
+      "default": "./build/*.js"
+    },
+    "#tests": {
+      "node": "./tests/index.js",
+      "default": "./build/index.js"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@japa/assert": "^1.3.6",
+    "@japa/run-failed-tests": "^1.1.0",
+    "@japa/runner": "^2.2.2",
+    "@japa/spec-reporter": "^1.3.2",
+    "@swc/core": "^1.3.27",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "c8": "^7.12.0",
+    "commitizen": "^4.2.6",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^3.1.0",
+    "lint-staged": "^12.5.0",
+    "prettier": "^2.8.3",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^4.4.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "c8": {
+    "all": true,
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "report-dir": "./tests/Coverage",
+    "check-coverage": true
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "lint-staged && exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "avoid",
+    "endOfLine": "lf",
+    "semi": false,
+    "printWidth": 80,
+    "overrides": [
+      {
+        "files": "tests/**/*",
+        "options": {
+          "printWidth": 120
+        }
+      }
+    ]
+  },
+  "eslintIgnore": [
+    "build/**/*"
+  ],
+  "eslintConfig": {
+    "env": {
+      "es2021": true,
+      "node": true
+    },
+    "globals": {
+      "ioc": true,
+      "Env": true,
+      "Path": true,
+      "Config": true,
+      "container": true
+    },
+    "plugins": [
+      "prettier",
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "standard",
+      "eslint:recommended",
+      "plugin:prettier/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/eslint-recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "rules": {
+      "camelcase": "off",
+      "dot-notation": "off",
+      "prettier/prettier": "error",
+      "no-useless-constructor": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+        }
+      ]
+    }
+  }
+}
