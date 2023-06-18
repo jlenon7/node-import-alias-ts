@@ -1,6 +1,6 @@
 {
   "name": "node-import-alias-ts",
-  "version": "1.0.13",
+  "version": "0.0.15",
   "description": "Simple POC writing a NPM package using TypeScript and Node.js import aliases.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",
@@ -12,6 +12,9 @@
     "import-alias"
   ],
   "scripts": {
+    "publish:build": "cd build && npm publish --access public",
+    "prepublishOnly": "cp ../LICENSE.md LICENSE.md && cp ../README.md README.md",
+    "compile": "rimraf build && tsc --project bin/tsconfig.build.json",
     "lint:fix": "eslint \"{bin,src,tests}/**/*.ts\" --fix",
     "test": "npm run --silent lint:fix && sh node bin/test.ts",
     "test:debug": "cross-env DEBUG=api:* sh node --inspect bin/test.ts",
@@ -38,15 +41,11 @@
     "#tests/*": "./tests/*.js",
     "#tests": "./tests/index.js"
   },
-  "dependencies": {
-    "@athenna/common": "^3.4.3"
-  },
   "devDependencies": {
     "@japa/assert": "^1.3.6",
     "@japa/run-failed-tests": "^1.1.0",
     "@japa/runner": "^2.2.2",
     "@japa/spec-reporter": "^1.3.2",
-    "@swc/core": "^1.3.27",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
     "c8": "^7.12.0",
@@ -160,5 +159,8 @@
         }
       ]
     }
+  },
+  "dependencies": {
+    "@athenna/common": "^3.6.0"
   }
 }
